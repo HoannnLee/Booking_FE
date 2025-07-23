@@ -10,12 +10,35 @@ import { KeyCodeUtils, LanguageUtils } from '../../utils';
 import image from '../../assets/images/';
 import './Login.scss';
 import { FormattedMessage } from 'react-intl';
+import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 
 class Login extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            userName: '',
+            password: '',
+            isShowHidePassword: false,
+        };
     }
 
+    handleOnchangeUserName = (e) => {
+        this.setState({
+            userName: e.target.value,
+        });
+    };
+
+    handleOnchangePassword = (e) => {
+        this.setState({
+            password: e.target.value,
+        });
+    };
+
+    handleShowHidePassword = () => {
+        this.setState({
+            isShowHidePassword: !this.state.isShowHidePassword,
+        });
+    };
     render() {
         return (
             <div className="login-background">
@@ -45,15 +68,27 @@ class Login extends Component {
                                     type="text"
                                     className="form-control login-input"
                                     placeholder="Enter your username"
+                                    value={this.state.userName}
+                                    onChange={(e) => this.handleOnchangeUserName(e)}
                                 />
                             </div>
                             <div className="form-group">
                                 <label className="login-label"> Password</label>
-                                <input
-                                    type="text"
-                                    className="form-control login-input"
-                                    placeholder="Enter your password"
-                                />
+                                <div className="custom-input-password">
+                                    <input
+                                        type={this.state.isShowHidePassword ? 'text' : 'password'}
+                                        className="form-control login-input"
+                                        placeholder="Enter your password"
+                                        value={this.state.password}
+                                        onChange={(e) => this.handleOnchangePassword(e)}
+                                    />
+                                    <span onClick={() => this.handleShowHidePassword()}>
+                                        <FontAwesomeIcon
+                                            icon={this.state.isShowHidePassword ? faEye : faEyeSlash}
+                                            className="icon-eye"
+                                        />
+                                    </span>
+                                </div>
                             </div>
                             <div className="col-12">
                                 <button className="btn btn-info text-white mt-5 btn-login">Login</button>

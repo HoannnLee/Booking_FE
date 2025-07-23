@@ -1,17 +1,21 @@
 .login-background {
     height: 100vh;
     background-color: #92d7ee;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: relative;
 
     .login-container {
         width: 400px;
-        height: auto;
-        padding: 32px 24px;
+        height: 650px;
+        padding: 40px 24px;
         border-radius: 12px;
         background-color: #fff;
         box-shadow: 0 0 4px 4px rgba($color: #000000, $alpha: 0.05);
+        position: absolute;
+        top: 12px;
+        left: 0;
+        right: 12px;
+        bottom: 12px;
+        margin: auto;
     }
     .login-content {
         .login-content__header {
@@ -120,6 +124,20 @@
                 font-weight: 600;
                 &:hover {
                     color: #0866ff;
+                }
+            }
+
+            .custom-input-password {
+                position: relative;
+
+                .icon-eye {
+                    position: absolute;
+                    right: 14px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    &:hover {
+                        cursor: pointer;
+                    }
                 }
             }
         }
