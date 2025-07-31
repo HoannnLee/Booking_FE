@@ -1,23 +1,33 @@
-// src/store/reducers/userReducer.js
+import actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    isAuthenticated: false,
-    userInfo: null,
-};
+    isLoggedIn: false,
+    userInfo: null
+}
 
-const userReducer = (state = initialState, action) => {
+const appReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'SET_USER':
+        case actionTypes.USER_LOGIN_SUCCESS:
             return {
                 ...state,
-                isAuthenticated: true,
-                userInfo: action.payload,
-            };
-        case 'LOGOUT':
-            return initialState;
+                isLoggedIn: true,
+                userInfo: action.userInfo
+            }
+        case actionTypes.USER_LOGIN_FAIL:
+            return {
+                ...state,
+                isLoggedIn: false,
+                userInfo: null
+            }
+        case actionTypes.PROCESS_LOGOUT:
+            return {
+                ...state,
+                isLoggedIn: false,
+                userInfo: null
+            }
         default:
             return state;
     }
-};
+}
 
-export default userReducer;
+export default appReducer;

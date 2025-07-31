@@ -3,7 +3,7 @@ import { history } from '../redux';
 import { Navigate } from 'react-router-dom';
 
 export const userIsAuthenticated = connectedRouterRedirect({
-    authenticatedSelector: (state) => state.admin.isLoggedIn,
+    authenticatedSelector: (state) => state.user.isLoggedIn,
     wrapperDisplayName: 'UserIsAuthenticated',
     redirectPath: '/login',
     redirectAction: () => (dispatch, getState) => {
@@ -12,7 +12,7 @@ export const userIsAuthenticated = connectedRouterRedirect({
 });
 
 export const userIsNotAuthenticated = connectedRouterRedirect({
-    authenticatedSelector: (state) => !state.admin?.isLoggedIn,
+    authenticatedSelector: (state) => !state.user?.isLoggedIn,
     wrapperDisplayName: 'UserIsNotAuthenticated',
     redirectPath: '/',
     allowRedirectBack: false,

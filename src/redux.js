@@ -16,7 +16,7 @@ let isDevelopment = environment === 'development';
 //hide redux logs
 isDevelopment = false;
 
-export const history = createBrowserHistory({ basename: import.meta.env.REACT_APP_ROUTER_BASE_NAME });
+export const history = createBrowserHistory({ basename: import.meta.env.VITE_ROUTER_BASE_NAME });
 
 const reduxStateSyncConfig = {
     whitelist: [actionTypes.APP_START_UP_COMPLETE],

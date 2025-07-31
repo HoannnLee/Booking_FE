@@ -11,6 +11,7 @@ import image from '../../assets/images/';
 import './Login.scss';
 import { FormattedMessage } from 'react-intl';
 import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
+import { handleLoginApi } from '../../services/userService';
 
 class Login extends Component {
     constructor(props) {
@@ -19,6 +20,7 @@ class Login extends Component {
             userName: '',
             password: '',
             isShowHidePassword: false,
+            errMsg: '',
         };
     }
 
@@ -38,6 +40,32 @@ class Login extends Component {
         this.setState({
             isShowHidePassword: !this.state.isShowHidePassword,
         });
+    };
+
+    handleLogin = async () => {
+        console.log('user name:', this.state.userName, 'password: ', this.state.password);
+
+        try {
+            const data = await handleLoginApi(this.state.userName, this.state.password);
+
+            this.userLoginSuccess(data.user);
+
+            if (data && data.errCode !== 0) {
+                this.setState({
+                    errMsg: data.message,
+                });
+            }
+
+            if (data && data.errCode === 0) {
+                console.log('Login success!!!');
+            }
+        } catch (error) {
+            if (error.data.message) {
+                this.setState({
+                    errMsg: error.data.message,
+                });
+            }
+        }
     };
     render() {
         return (
@@ -90,8 +118,16 @@ class Login extends Component {
                                     </span>
                                 </div>
                             </div>
+                            <div className="col-12 errMsg">
+                                <span> {this.state.errMsg}</span>
+                            </div>
                             <div className="col-12">
-                                <button className="btn btn-info text-white mt-5 btn-login">Login</button>
+                                <button
+                                    className="btn btn-info text-white mt-5 btn-login"
+                                    onClick={() => this.handleLogin()}
+                                >
+                                    Login
+                                </button>
                             </div>
                             <div className="col-12 mt-4">
                                 <span className="login-noAccount__des">
@@ -118,8 +154,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         navigate: (path) => dispatch(push(path)),
-        adminLoginSuccess: (adminInfo) => dispatch(actions.adminLoginSuccess(adminInfo)),
-        adminLoginFail: () => dispatch(actions.adminLoginFail()),
+        // adminLoginSuccess: (adminInfo) => dispatch(actions.adminLoginSuccess(adminInfo)),
+        userLoginFail: () => dispatch(actions.adminLoginFail()),
+        userLoginSuccess: (userInfo) => dispatch(actions.userLoginSuccess(userInfo)),
     };
 };
 
