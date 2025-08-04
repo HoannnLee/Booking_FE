@@ -1,10 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Route, Routes, unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
+import { Route, Routes, unstable_HistoryRouter as HistoryRouter, Navigate } from 'react-router-dom';
 // import { history } from '../redux';
 import { ToastContainer } from 'react-toastify';
-
-import { userIsAuthenticated, userIsNotAuthenticated } from '../hoc/authentication';
 
 import { path } from '../utils';
 
@@ -16,9 +14,11 @@ import System from '../routes/System';
 
 import { CustomToastCloseButton } from '../components/CustomToast';
 import ConfirmModal from '../components/ConfirmModal';
-
-const LoginWrapped = userIsNotAuthenticated(Login);
-const SystemWrapped = userIsAuthenticated(System);
+import PublicOnlyRoute from './Router/publicOnlyRoute';
+import PrivateRoute from './Router/privateRoute';
+import ProductManage from './System/ProductManage';
+import UserManage from './System/UserManage';
+import RegisterPackageGroupOrAcc from './System/RegisterPackageGroupOrAcc';
 
 class App extends Component {
     handlePersistorState = () => {
@@ -49,8 +49,20 @@ class App extends Component {
                     <span className="content-container">
                         <Routes>
                             <Route path={path.HOME} element={<Home />} />
-                            <Route path={path.LOGIN} element={<LoginWrapped />} />
-                            <Route path={path.SYSTEM} element={<SystemWrapped />} />
+                            <Route path={path.LOGIN} element={<PublicOnlyRoute element={Login} />} />
+
+                            {/* Route hệ thống */}
+                            <Route path={path.SYSTEM} element={<PrivateRoute element={System} />}>
+                                <Route index element={<Navigate to="user-manage" replace />} />
+
+                                {/* Các đường dẫn con */}
+                                <Route path="user-manage" element={<UserManage />} />
+                                <Route path="product-manage" element={<ProductManage />} />
+                                <Route
+                                    path="register-package-group-or-account"
+                                    element={<RegisterPackageGroupOrAcc />}
+                                />
+                            </Route>
                         </Routes>
                     </span>
 
