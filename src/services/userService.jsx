@@ -10,4 +10,14 @@ const handleLoginApi = async (email, password) => {
     }
 };
 
-export { handleLoginApi };
+const getAllUsers = async (inputId) => {
+    try {
+        const res = await httpRequest.get(`/api/get-all-user?id=${inputId}`);
+
+        return res.data;
+    } catch (error) {
+        throw error.message;
+    }
+};
+
+export { handleLoginApi, getAllUsers };
