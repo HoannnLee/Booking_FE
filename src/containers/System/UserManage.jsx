@@ -3,9 +3,10 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Outlet } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faUserPen } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faTrash, faUserPen } from '@fortawesome/free-solid-svg-icons';
 import './UserManage.scss';
 import { getAllUsers } from '../../services/userService';
+import ModalUser from './ModalUser';
 class UserManage extends Component {
     /**
      * Life cycle(vòng đời của 1 class)
@@ -17,6 +18,7 @@ class UserManage extends Component {
         super(props);
         this.state = {
             arrUsers: [],
+            isOpenModal: false,
         };
     }
 
@@ -30,16 +32,43 @@ class UserManage extends Component {
         }
     }
 
+    handleCreateNewUser = () => {
+        this.setState({
+            isOpenModal: true,
+        });
+    };
+
+    toggleModal = () => {
+        this.setState({
+            isOpenModal: !this.state.isOpenModal,
+        });
+    };
     render() {
         let users = this.state.arrUsers;
 
         return (
             <div className="users-container mx-4">
-                <div className="text-center mt-4 font-weight-bold users-container__heading">Manage users</div>
+                <ModalUser isOpen={this.state.isOpenModal} toogleModalPrarent={this.toggleModal} test={'adsac'} />
+                <div className="mt-4 user-container__block-heading">
+                    <div className=" ">
+                        <h1 className="font-weight-bold users-container__heading">Manage users</h1>
+                        <p className="users-container__des">Manage users account is here</p>
+                    </div>
+                    <div>
+                        <button
+                            onClick={() => this.handleCreateNewUser()}
+                            className="btn btn-primary px-3 py-1 btn--addUser"
+                            style={{ height: 40 }}
+                        >
+                            <FontAwesomeIcon icon={faPlus} className="mr-3" />
+                            Add new user
+                        </button>
+                    </div>
+                </div>
                 <div className="users-table mt-4">
-                    <table className="table table-hover rounded-pill">
-                        <thead className="thead rounded-pill">
-                            <tr>
+                    <table className="table table-hover">
+                        <thead className="thead ">
+                            <tr className="thead-row">
                                 <th scope="col" className="text-center">
                                     ID
                                 </th>
@@ -59,9 +88,9 @@ class UserManage extends Component {
                                 users.map((item, index) => {
                                     return (
                                         <tr>
-                                            <th scope="row" className="text-center">
+                                            <td scope="row" className="text-center">
                                                 {item.id}
-                                            </th>
+                                            </td>
                                             <td>{item.email}</td>
                                             <td>{item.firstName}</td>
                                             <td>{item.lastName}</td>
