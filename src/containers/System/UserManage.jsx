@@ -5,7 +5,7 @@ import { Outlet } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faTrash, faUserPen } from '@fortawesome/free-solid-svg-icons';
 import './UserManage.scss';
-import { getAllUsers } from '../../services/userService';
+import { getAllUsers, createNewUserService } from '../../services/userService';
 import ModalUser from './ModalUser';
 class UserManage extends Component {
     /**
@@ -23,6 +23,10 @@ class UserManage extends Component {
     }
 
     async componentDidMount() {
+        await this.getALLUsers();
+    }
+
+    getALLUsers = async () => {
         const res = await getAllUsers('ALL');
         console.log('data: ', res.users);
         if (res && res.errCode === 0) {
@@ -30,7 +34,7 @@ class UserManage extends Component {
                 arrUsers: res.users,
             });
         }
-    }
+    };
 
     handleCreateNewUser = () => {
         this.setState({
@@ -43,12 +47,33 @@ class UserManage extends Component {
             isOpenModal: !this.state.isOpenModal,
         });
     };
+
+    CreateNewUser = async (data) => {
+        try {
+            const res = await createNewUserService(data);
+            console.log('check respone', res);
+            if (res && res.errCode !== 0) {
+                alert(res.message);
+            } else {
+                await this.getALLUsers();
+                this.setState({
+                    isOpenModal: false,
+                });
+            }
+        } catch (error) {
+            console.log('error', error);
+        }
+    };
     render() {
         let users = this.state.arrUsers;
 
         return (
             <div className="users-container mx-4">
-                <ModalUser isOpen={this.state.isOpenModal} toogleModalPrarent={this.toggleModal} test={'adsac'} />
+                <ModalUser
+                    isOpen={this.state.isOpenModal}
+                    toogleModalPrarent={this.toggleModal}
+                    handleCreateUser={this.CreateNewUser}
+                />
                 <div className="mt-4 user-container__block-heading">
                     <div className=" ">
                         <h1 className="font-weight-bold users-container__heading">Manage users</h1>
@@ -87,7 +112,7 @@ class UserManage extends Component {
                             {users &&
                                 users.map((item, index) => {
                                     return (
-                                        <tr>
+                                        <tr key={index}>
                                             <td scope="row" className="text-center">
                                                 {item.id}
                                             </td>
@@ -96,8 +121,8 @@ class UserManage extends Component {
                                             <td>{item.lastName}</td>
                                             <td>{item.address}</td>
                                             <td>{item.phoneNumber}</td>
-                                            <td>{item.gender}</td>
-                                            <td>{item.roleId}</td>
+                                            <td className="p-35">{item.gender}</td>
+                                            <td className="p-35">{item.roleId}</td>
                                             <td>{item.positionId}</td>
                                             <td>
                                                 <a className="user-action  red" href="">

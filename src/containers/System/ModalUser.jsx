@@ -8,17 +8,57 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 class ModalUser extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            email: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            address: '',
+            phone: '',
+        };
     }
 
     componentDidMount() {}
 
+    handleOnchangeInput = (e, id) => {
+        //bad code modify trực tiếp các state dễ gây ra tình huống lưu dữ liệu bị bất đồng bộ, nếu dự án lớn lên(cái lưu dc, cái ko lưu được)
+        // this.state[id] = e.target.value;
+        // this.setState({
+        //     ...this.state,
+        // });
+
+        // good code
+        let copyState = { ...this.state };
+        copyState[id] = e.target.value;
+
+        this.setState({
+            ...copyState,
+        });
+    };
     toggle = () => {
         this.props.toogleModalPrarent();
     };
+
+    checkValidateInput = () => {
+        let isValid = true;
+        const arrInput = ['email', 'password', 'firstName', 'lastName', 'address', 'phone'];
+        for (let i = 0; i < arrInput.length; i++) {
+            if (!this.state[arrInput[i]]) {
+                isValid = false;
+                alert('missing parameter: ' + arrInput[i]);
+                break;
+            }
+        }
+        return isValid;
+    };
+    handleCreateNewUser = () => {
+        const isValidate = this.checkValidateInput();
+        console.log('check props from child', this.props);
+        if (isValidate) {
+            this.props.handleCreateUser(this.state);
+        }
+    };
     render() {
-        console.log('check state modal:', this.props.isOpenModal);
-        console.log('check props modal:', this.props);
         return (
             <>
                 <Modal
@@ -39,26 +79,51 @@ class ModalUser extends Component {
                             <div className="direct-row mb-4">
                                 <div className="direct-col col-6">
                                     <label className="label-modal">Email</label>
-                                    <input type="text" className="input-modal" />
+                                    <input
+                                        type="text"
+                                        className="input-modal"
+                                        onChange={(e) => this.handleOnchangeInput(e, 'email')}
+                                        value={this.state.email}
+                                    />
                                 </div>
                                 <div className="direct-col col-6">
                                     <label className="label-modal">Password</label>
-                                    <input type="password" className="input-modal" />
+                                    <input
+                                        type="password"
+                                        className="input-modal"
+                                        onChange={(e) => this.handleOnchangeInput(e, 'password')}
+                                        value={this.state.password}
+                                    />
                                 </div>
                             </div>
                             <div className="direct-row mb-4">
                                 <div className="direct-col col-6">
                                     <label className="label-modal">First Name</label>
-                                    <input type="text" className="input-modal" />
+                                    <input
+                                        type="text"
+                                        className="input-modal"
+                                        onChange={(e) => this.handleOnchangeInput(e, 'firstName')}
+                                        value={this.state.firstName}
+                                    />
                                 </div>
                                 <div className="direct-col col-6 ">
                                     <label className="label-modal">Last Name</label>
-                                    <input type="text" className="input-modal" />
+                                    <input
+                                        type="text"
+                                        className="input-modal"
+                                        onChange={(e) => this.handleOnchangeInput(e, 'lastName')}
+                                        value={this.state.lastName}
+                                    />
                                 </div>
                             </div>
                             <div className="direct-col col-12 mb-4">
                                 <label className="label-modal">Address</label>
-                                <input type="text" className="input-modal" />
+                                <input
+                                    type="text"
+                                    className="input-modal"
+                                    onChange={(e) => this.handleOnchangeInput(e, 'address')}
+                                    value={this.state.address}
+                                />
                             </div>
                             <div className="direct-row mb-4">
                                 <div className="direct-col col-4">
@@ -67,19 +132,35 @@ class ModalUser extends Component {
                                 </div>
                                 <div className="direct-col col-4 ">
                                     <label className="label-modal">Role ID</label>
-                                    <input type="text" className="input-modal" />
+                                    {/* <input type="text" className="input-modal" /> */}
+                                    <select id="gender" name="gender" className="input-modal">
+                                        <option selected className="input-modal">
+                                            Choose...
+                                        </option>
+                                        <option value="1" className="input-modal">
+                                            Male
+                                        </option>
+                                        <option value="0" className="input-modal">
+                                            Female
+                                        </option>
+                                    </select>
                                 </div>
                                 <div className="direct-col col-4 ">
                                     <label className="label-modal">Phone</label>
-                                    <input type="text" className="input-modal" />
+                                    <input
+                                        type="text"
+                                        className="input-modal"
+                                        onChange={(e) => this.handleOnchangeInput(e, 'phone')}
+                                        value={this.state.phone}
+                                    />
                                 </div>
                             </div>
                         </div>
                     </ModalBody>
 
                     <ModalFooter className="modal-custom__footer">
-                        <Button onClick={() => this.toggle()} className="  modal-custom__btnSubmit">
-                            Save Changes
+                        <Button onClick={() => this.handleCreateNewUser()} className="  modal-custom__btnSubmit">
+                            Add New
                         </Button>
                         <Button onClick={() => this.toggle()} className=" modal-custom__btnCancel">
                             Close

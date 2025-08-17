@@ -1,3 +1,4 @@
+import { dateFilter } from 'react-bootstrap-table2-filter';
 import httpRequest from '../httpRequest';
 
 const handleLoginApi = async (email, password) => {
@@ -20,4 +21,14 @@ const getAllUsers = async (inputId) => {
     }
 };
 
-export { handleLoginApi, getAllUsers };
+const createNewUserService = async (data) => {
+    try {
+        const res = await httpRequest.post('/api/create-new-user', data);
+
+        return res.data;
+    } catch (error) {
+        throw error.message;
+    }
+};
+
+export { handleLoginApi, getAllUsers, createNewUserService };
