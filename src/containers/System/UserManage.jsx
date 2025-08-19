@@ -5,8 +5,10 @@ import { Outlet } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faTrash, faUserPen } from '@fortawesome/free-solid-svg-icons';
 import './UserManage.scss';
-import { getAllUsers, createNewUserService } from '../../services/userService';
+import { getAllUsers, createNewUserService, deleteUserService, editUserService } from '../../services/userService';
 import ModalUser from './ModalUser';
+import ModalEdit from './ModalEdit';
+import { Button } from 'reactstrap';
 class UserManage extends Component {
     /**
      * Life cycle(vòng đời của 1 class)
@@ -19,6 +21,8 @@ class UserManage extends Component {
         this.state = {
             arrUsers: [],
             isOpenModal: false,
+            openModalEdit: false,
+            users: {},
         };
     }
 
@@ -28,7 +32,7 @@ class UserManage extends Component {
 
     getALLUsers = async () => {
         const res = await getAllUsers('ALL');
-        console.log('data: ', res.users);
+
         if (res && res.errCode === 0) {
             this.setState({
                 arrUsers: res.users,
@@ -48,6 +52,11 @@ class UserManage extends Component {
         });
     };
 
+    toggleModalEdit = () => {
+        this.setState({
+            openModalEdit: !this.state.openModalEdit,
+        });
+    };
     CreateNewUser = async (data) => {
         try {
             const res = await createNewUserService(data);
@@ -64,6 +73,46 @@ class UserManage extends Component {
             console.log('error', error);
         }
     };
+
+    handleDeleteUser = async (userId) => {
+        console.log('User Id: ', userId);
+        try {
+            const res = await deleteUserService(userId);
+            if (res && res.errCode !== 0) {
+                console.log('message delete: ', res);
+            } else {
+                await this.getALLUsers();
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    handleOpenModalEdit = (user) => {
+        console.log('check modal edit: ', user);
+        this.setState({
+            openModalEdit: true,
+            users: user,
+        });
+    };
+
+    editUser = async (user) => {
+        try {
+            const res = await editUserService(user);
+
+            if (res && res.errCode !== 0) {
+                console.log('Have a problem', res.message);
+            } else {
+                await this.getALLUsers();
+                this.setState({
+                    openModalEdit: false,
+                });
+                console.log('Edit success');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
     render() {
         let users = this.state.arrUsers;
 
@@ -74,6 +123,15 @@ class UserManage extends Component {
                     toogleModalPrarent={this.toggleModal}
                     handleCreateUser={this.CreateNewUser}
                 />
+                {this.state.openModalEdit && (
+                    <ModalEdit
+                        isOpen={this.state.openModalEdit}
+                        toogleModalPrarent={this.toggleModalEdit}
+                        dataFromParent={this.state.users}
+                        handleEditUser={this.editUser}
+                    />
+                )}
+
                 <div className="mt-4 user-container__block-heading">
                     <div className=" ">
                         <h1 className="font-weight-bold users-container__heading">Manage users</h1>
@@ -125,11 +183,19 @@ class UserManage extends Component {
                                             <td className="p-35">{item.roleId}</td>
                                             <td>{item.positionId}</td>
                                             <td>
-                                                <a className="user-action  red" href="">
-                                                    <FontAwesomeIcon icon={faTrash} className="user-action__icon " />
+                                                <a className="user-action  red">
+                                                    <FontAwesomeIcon
+                                                        icon={faTrash}
+                                                        className="user-action__icon "
+                                                        onClick={() => this.handleDeleteUser(item.id)}
+                                                    />
                                                 </a>
-                                                <a className="user-action blue" href="">
-                                                    <FontAwesomeIcon icon={faUserPen} className="user-action__icon " />
+                                                <a className="user-action blue">
+                                                    <FontAwesomeIcon
+                                                        icon={faUserPen}
+                                                        className="user-action__icon "
+                                                        onClick={() => this.handleOpenModalEdit(item)}
+                                                    />
                                                 </a>
                                             </td>
                                         </tr>

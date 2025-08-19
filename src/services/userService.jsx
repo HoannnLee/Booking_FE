@@ -31,4 +31,25 @@ const createNewUserService = async (data) => {
     }
 };
 
-export { handleLoginApi, getAllUsers, createNewUserService };
+const deleteUserService = async (userId) => {
+    try {
+        const res = await httpRequest.delete('/api/delete-user', {
+            data: {
+                id: userId,
+            },
+        });
+        return res.data;
+    } catch (error) {
+        throw error.message;
+    }
+};
+
+const editUserService = async (dataInput) => {
+    try {
+        const res = await httpRequest.put('/api/edit-user', dataInput);
+        return res.data;
+    } catch (error) {
+        throw error.message;
+    }
+};
+export { handleLoginApi, getAllUsers, createNewUserService, deleteUserService, editUserService };

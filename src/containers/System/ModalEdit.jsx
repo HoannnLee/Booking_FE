@@ -5,10 +5,12 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-class ModalUser extends Component {
+import _ from 'lodash';
+class ModalEdit extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: '',
             email: '',
             password: '',
             firstName: '',
@@ -18,15 +20,22 @@ class ModalUser extends Component {
         };
     }
 
-    componentDidMount() {}
+    componentDidMount() {
+        const user = this.props.dataFromParent;
+        if (user && !_.isEmpty(user)) {
+            this.setState({
+                id: user.id,
+                email: user.email,
+                password: 'hello',
+                firstName: user.firstName,
+                lastName: user.lastName,
+                address: user.address,
+                phone: user.phoneNumber,
+            });
+        }
+    }
 
     handleOnchangeInput = (e, id) => {
-        //bad code modify trực tiếp các state dễ gây ra tình huống lưu dữ liệu bị bất đồng bộ, nếu dự án lớn lên(cái lưu dc, cái ko lưu được)
-        // this.state[id] = e.target.value;
-        // this.setState({
-        //     ...this.state,
-        // });
-
         // good code
         let copyState = { ...this.state };
         copyState[id] = e.target.value;
@@ -51,21 +60,14 @@ class ModalUser extends Component {
         }
         return isValid;
     };
-    handleCreateNewUser = () => {
+    handleSaveChanges = () => {
         const isValidate = this.checkValidateInput();
         console.log('check props from child', this.props);
         if (isValidate) {
-            this.props.handleCreateUser(this.state);
-            this.setState({
-                email: '',
-                password: '',
-                firstName: '',
-                lastName: '',
-                address: '',
-                phone: '',
-            });
+            this.props.handleEditUser(this.state);
         }
     };
+
     render() {
         return (
             <>
@@ -77,7 +79,7 @@ class ModalUser extends Component {
                     className="modal-custom"
                 >
                     <ModalHeader className="modal-custon__header">
-                        Create a new User
+                        Edit User
                         <Button onClick={() => this.toggle()}>
                             <FontAwesomeIcon icon={faXmark} className="btn-close" />
                         </Button>
@@ -92,6 +94,7 @@ class ModalUser extends Component {
                                         className="input-modal"
                                         onChange={(e) => this.handleOnchangeInput(e, 'email')}
                                         value={this.state.email}
+                                        disabled
                                     />
                                 </div>
                                 <div className="direct-col col-6">
@@ -101,6 +104,7 @@ class ModalUser extends Component {
                                         className="input-modal"
                                         onChange={(e) => this.handleOnchangeInput(e, 'password')}
                                         value={this.state.password}
+                                        disabled
                                     />
                                 </div>
                             </div>
@@ -141,7 +145,7 @@ class ModalUser extends Component {
                                 <div className="direct-col col-4 ">
                                     <label className="label-modal">Role ID</label>
                                     {/* <input type="text" className="input-modal" /> */}
-                                    <select id="gender" name="gender" className="input-modal">
+                                    {/* <select id="gender" name="gender" className="input-modal">
                                         <option selected className="input-modal">
                                             Choose...
                                         </option>
@@ -151,7 +155,7 @@ class ModalUser extends Component {
                                         <option value="0" className="input-modal">
                                             Female
                                         </option>
-                                    </select>
+                                    </select> */}
                                 </div>
                                 <div className="direct-col col-4 ">
                                     <label className="label-modal">Phone</label>
@@ -167,8 +171,8 @@ class ModalUser extends Component {
                     </ModalBody>
 
                     <ModalFooter className="modal-custom__footer">
-                        <Button onClick={() => this.handleCreateNewUser()} className="  modal-custom__btnSubmit">
-                            Add New
+                        <Button onClick={() => this.handleSaveChanges()} className="  modal-custom__btnSubmit">
+                            Save Changes
                         </Button>
                         <Button onClick={() => this.toggle()} className=" modal-custom__btnCancel">
                             Close
@@ -188,4 +192,4 @@ const mapDispatchToProps = (dispatch) => {
     return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModalUser);
+export default connect(mapStateToProps, mapDispatchToProps)(ModalEdit);
