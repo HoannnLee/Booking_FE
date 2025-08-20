@@ -19,6 +19,7 @@ import PrivateRoute from './Router/privateRoute';
 import ProductManage from './System/ProductManage';
 import UserManage from './System/UserManage';
 import RegisterPackageGroupOrAcc from './System/RegisterPackageGroupOrAcc';
+import HomePage from './Home/HomePage';
 
 class App extends Component {
     handlePersistorState = () => {
@@ -43,13 +44,14 @@ class App extends Component {
         return (
             <Fragment>
                 <div className="main-container">
-                    <ConfirmModal />
+                    {/* <ConfirmModal /> */}
                     {this.props.isLoggedIn && <Header />}
 
                     <span className="content-container">
                         <Routes>
                             <Route path={path.HOME} element={<Home />} />
                             <Route path={path.LOGIN} element={<PublicOnlyRoute element={Login} />} />
+                            <Route path={path.HOMEPAGE} element={<HomePage />} />
 
                             {/* Route hệ thống */}
                             <Route path={path.SYSTEM} element={<PrivateRoute element={System} />}>
