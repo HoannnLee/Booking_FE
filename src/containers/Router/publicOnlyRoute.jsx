@@ -8,12 +8,13 @@ class PublicOnlyRoute extends React.Component {
         const { isLoggedIn, element: Element } = this.props;
 
         if (isLoggedIn) {
-            return <Navigate to="/" replace />;
+            return <Navigate to="/home" replace />;
         }
 
         return <Element />;
     }
 }
+
 
 const mapStateToProps = (state) => ({
     isLoggedIn: state.user.isLoggedIn,

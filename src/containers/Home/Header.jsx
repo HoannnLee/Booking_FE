@@ -5,10 +5,17 @@ import './Header.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faBars, faClockRotateLeft, faHouseMedical, faPlus, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faHandshake } from '@fortawesome/free-regular-svg-icons';
-import { FormattedMessage } from "react-intl"
+import { FormattedMessage } from "react-intl";
+import { languages } from "../../utils/constant"
+import { changeLanguageApp } from '../../store/actions/appActions';
 
 class Header extends Component {
+    changeLanguage = (language) => {
+        console.log("check language: ", this.props.language)
+        this.props.changeLanguageAppRedux(language)
+    }
     render() {
+        let showLanguage = this.props.language;
         return (
             <div className="home-header-container">
                 <div className="home-header__content">
@@ -54,13 +61,13 @@ class Header extends Component {
                             <span><FormattedMessage id="header.schedule" /></span>
                         </a>
                         <div className='change-language'>
-                            <span className='show-language'>vi
+                            <span className='show-language'>{showLanguage}
                                 <FontAwesomeIcon icon={faAngleDown} className='icon-agnle' />
 
                             </span>
                             <ul className='language-list'>
-                                <li className='language-item'>en</li>
-                                <li className='language-item'>vi</li>
+                                <li className='language-item' onClick={() => this.changeLanguage(languages.EN)}>en</li>
+                                <li className='language-item' onClick={() => this.changeLanguage(languages.VI)}>vi</li>
                             </ul>
                         </div>
 
@@ -131,8 +138,14 @@ const mapStateToProps = (state) => {
     };
 };
 
+//fire các event của th Redux, và biến các actions trong redux thành 1 props của th component(hiện tại là Header)
 const mapDispatchToProps = (dispatch) => {
-    return {};
+    return {
+        changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language))
+    };
 };
 
+
+//connect là hàm của thư viện nhằm mục đích kết nối giữa th React và Redux lại với nhau 
+//để thằng React có thể sử dụng được những state của th Redux
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
