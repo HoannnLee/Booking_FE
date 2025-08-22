@@ -1,4 +1,16 @@
 {
+    "header": {
+        "medicalspecialty": "Medical Specialty",
+        "findadoctorbyspecialty": "Find a doctor by specialty",
+        "health-facility": "Health facility",
+        "select-room": "Choose Hospital Clinic",
+        "doctor": "Doctor",
+        "select-doctor": "Choose a doctor",
+        "fee": "Medical package",
+        "check-health": "Check health General",
+        "contact": "Contact",
+        "schedule": "Schedule"
+    },
     "common": {
         "add": "Add",
         "edit": "Edit",

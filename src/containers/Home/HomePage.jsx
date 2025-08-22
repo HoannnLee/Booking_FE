@@ -8,7 +8,7 @@ class HomePage extends Component {
         return (
             <>
                 <Header />
-                <h1>Hello HomePage</h1>;
+
             </>
         );
     }

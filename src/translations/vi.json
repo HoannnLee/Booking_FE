@@ -1,4 +1,16 @@
 {
+    "header": {
+        "medicalspecialty": "Chuyên Khoa",
+        "findadoctorbyspecialty": "Tìm bác sĩ theo chuyên khoa",
+        "health-facility": "Cơ sở y tế",
+        "select-room": "Chọn bệnh viện phòng khám",
+        "doctor": "Bác sĩ",
+        "select-doctor": "Chọn bác sĩ",
+        "fee": "Gói khám",
+        "check-health": "Khám sức khỏe tổng quát",
+        "contact": "Hợp tác",
+        "schedule": "Lịch hẹn"
+    },
     "common": {
         "add": "Thêm",
         "edit": "Sửa",
