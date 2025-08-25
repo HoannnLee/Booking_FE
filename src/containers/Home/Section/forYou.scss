@@ -1,0 +1,37 @@
+.section-forYou{
+    width: 1200px;
+    margin: 0 auto;
+    .forYou-Title {
+        h3{
+            padding: 20px 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+       
+    }
+    .forYou-Content{
+        padding: 20px 0;
+        display: flex;
+        .forYou-item{   
+            cursor: pointer;
+            margin-right: 60px;
+            text-decoration: none;
+            color: #000;
+            display: block;
+            .forYou-Img{
+                width: 220px;
+                height: 220px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+            .forYou-heading{
+                text-align: center;
+                margin-top: 24px;
+                font-size: 18px;
+                font-weight: 600;
+            }
+        }
+        
+    }
+
+}
