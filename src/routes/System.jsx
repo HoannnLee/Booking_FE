@@ -11,11 +11,9 @@ class System extends Component {
         return (
             <div className="system-container">
                 <div className="system-list">
-                    <>
-                        <div className="system-container">
-                            <Outlet />
-                        </div>
-                    </>
+                    <div className="system-container">
+                        <Outlet />
+                    </div>
                 </div>
             </div>
         );

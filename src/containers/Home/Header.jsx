@@ -18,59 +18,61 @@ class Header extends Component {
         let showLanguage = this.props.language;
         return (
             <div className="home-header-container">
-                <div className="home-header__content">
-                    <div className="header-content__logo">
-                        <FontAwesomeIcon icon={faBars} className="content-logo__icon" />
-                        <div className="content-logo__img"></div>
-                    </div>
-                    <div className="header-content__menu">
-                        <ul className="content-menu__list">
-                            <li className="content-menu__item">
-                                <a href="#" className='content-menu__link'>
-                                    <FormattedMessage id="header.medicalspecialty" />
-                                    <span><FormattedMessage id="header.findadoctorbyspecialty" /></span>
-                                </a>
-                            </li>
-                            <li className="content-menu__item">
-                                <a href="#" className='content-menu__link'>
-                                    <FormattedMessage id="header.health-facility" />
-                                    <span><FormattedMessage id="header.select-room" /></span>
-                                </a>
-                            </li>
-                            <li className="content-menu__item">
-                                <a href="#" className='content-menu__link'>
-                                    <FormattedMessage id="header.doctor" />
-                                    <span><FormattedMessage id="header.select-doctor" /></span>
-                                </a>
-                            </li>
-                            <li className="content-menu__item">
-                                <a href="#" className='content-menu__link'>
-                                    <FormattedMessage id="header.fee" />
-                                    <span><FormattedMessage id="header.check-health" /></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className="header-support">
-                        <a className="support-handShake support-block ">
-                            <FontAwesomeIcon icon={faHandshake} className="support-icon" />
-                            <span><FormattedMessage id="header.contact" /></span>
-                        </a>
-                        <a className="support-schedule  support-block">
-                            <FontAwesomeIcon icon={faClockRotateLeft} className="support-icon" />
-                            <span><FormattedMessage id="header.schedule" /></span>
-                        </a>
-                        <div className='change-language'>
-                            <span className='show-language'>{showLanguage}
-                                <FontAwesomeIcon icon={faAngleDown} className='icon-agnle' />
-
-                            </span>
-                            <ul className='language-list'>
-                                <li className='language-item' onClick={() => this.changeLanguage(languages.EN)}>en</li>
-                                <li className='language-item' onClick={() => this.changeLanguage(languages.VI)}>vi</li>
+                <div className='home-header__position'>
+                    <div className="home-header__content">
+                        <div className="header-content__logo">
+                            <FontAwesomeIcon icon={faBars} className="content-logo__icon" />
+                            <div className="content-logo__img"></div>
+                        </div>
+                        <div className="header-content__menu">
+                            <ul className="content-menu__list">
+                                <li className="content-menu__item">
+                                    <a href="#" className='content-menu__link'>
+                                        <FormattedMessage id="header.medicalspecialty" />
+                                        <span><FormattedMessage id="header.findadoctorbyspecialty" /></span>
+                                    </a>
+                                </li>
+                                <li className="content-menu__item">
+                                    <a href="#" className='content-menu__link'>
+                                        <FormattedMessage id="header.health-facility" />
+                                        <span><FormattedMessage id="header.select-room" /></span>
+                                    </a>
+                                </li>
+                                <li className="content-menu__item">
+                                    <a href="#" className='content-menu__link'>
+                                        <FormattedMessage id="header.doctor" />
+                                        <span><FormattedMessage id="header.select-doctor" /></span>
+                                    </a>
+                                </li>
+                                <li className="content-menu__item">
+                                    <a href="#" className='content-menu__link'>
+                                        <FormattedMessage id="header.fee" />
+                                        <span><FormattedMessage id="header.check-health" /></span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
+                        <div className="header-support">
+                            <a className="support-handShake support-block ">
+                                <FontAwesomeIcon icon={faHandshake} className="support-icon" />
+                                <span><FormattedMessage id="header.contact" /></span>
+                            </a>
+                            <a className="support-schedule  support-block">
+                                <FontAwesomeIcon icon={faClockRotateLeft} className="support-icon" />
+                                <span><FormattedMessage id="header.schedule" /></span>
+                            </a>
+                            <div className='change-language'>
+                                <span className='show-language'>{showLanguage}
+                                    <FontAwesomeIcon icon={faAngleDown} className='icon-agnle' />
 
+                                </span>
+                                <ul className='language-list'>
+                                    <li className='language-item' onClick={() => this.changeLanguage(languages.EN)}>en</li>
+                                    <li className='language-item' onClick={() => this.changeLanguage(languages.VI)}>vi</li>
+                                </ul>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
                 <div className='home-header__searchBackground'>

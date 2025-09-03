@@ -7,6 +7,7 @@ import { adminMenu } from './menuApp';
 import './Header.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRightToBracket } from '@fortawesome/free-solid-svg-icons';
+import UserManage from '../System/UserManage';
 
 class Header extends Component {
     render() {
@@ -18,7 +19,6 @@ class Header extends Component {
                 <div className="header-tabs-container">
                     <Navigator menus={adminMenu} />
                 </div>
-
                 {/* nút logout */}
                 <div className="btn btn-logout" onClick={processLogout}>
                     <FontAwesomeIcon icon={faRightToBracket} />

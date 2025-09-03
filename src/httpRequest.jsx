@@ -5,7 +5,7 @@ import _ from 'lodash';
 const httpRequest = axios.create({
     // trong ứng dụng vite nên tiếp đầu ngữ phải là VITE_BACKEND_URL thì nó mới nhận được giá trị
     baseURL: import.meta.env.VITE_BACKEND_URL,
-    // withCredentials: true,
+    withCredentials: true,
 });
 
 export const get = async (path, options = {}) => {
