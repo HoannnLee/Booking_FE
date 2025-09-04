@@ -1,0 +1,11 @@
+.admin-dashboard {
+    display: flex;
+    .admin-dashboard__menu {
+        align-items: stretch;
+        height: 100%;
+        flex: 0 0 12%;
+    }
+    .admin-dashboard__data {
+        flex: 0 0 88%;
+    }
+}

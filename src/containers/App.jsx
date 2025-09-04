@@ -16,12 +16,11 @@ import { CustomToastCloseButton } from '../components/CustomToast';
 import ConfirmModal from '../components/ConfirmModal';
 import PublicOnlyRoute from './Router/publicOnlyRoute';
 import PrivateRoute from './Router/privateRoute';
-import ProductManage from './System/ProductManage';
+import UserRedux from './System/UserRedux';
 import UserManage from './System/UserManage';
-import RegisterPackageGroupOrAcc from './System/RegisterPackageGroupOrAcc';
 import HomePage from './Home/HomePage';
 import CustomScrollbars from '../components/CustomScrollbars';
-import './App.scss'
+import './App.scss';
 
 class App extends Component {
     handlePersistorState = () => {
@@ -46,9 +45,6 @@ class App extends Component {
         return (
             <Fragment>
                 <div className="main-container">
-                    {/* <ConfirmModal /> */}
-                    {this.props.isLoggedIn && <Header />}
-
                     <div className="content-container">
                         <CustomScrollbars style={{ height: '100vh', width: '100%' }}>
                             <Routes>
@@ -62,11 +58,7 @@ class App extends Component {
 
                                     {/* Các đường dẫn con */}
                                     <Route path="user-manage" element={<UserManage />} />
-                                    <Route path="product-manage" element={<ProductManage />} />
-                                    <Route
-                                        path="register-package-group-or-account"
-                                        element={<RegisterPackageGroupOrAcc />}
-                                    />
+                                    <Route path="user-redux" element={<UserRedux />} />
                                 </Route>
                             </Routes>
                         </CustomScrollbars>

@@ -4,15 +4,18 @@ import { path } from '../utils';
 
 import Header from '../containers/Header/Header';
 import { Outlet } from 'react-router';
-
+import './System.scss';
 class System extends Component {
     render() {
-        // const { systemMenuPath } = this.props;
+        const { isLoggedIn } = this.props;
         return (
-            <div className="system-container">
-                <div className="system-list">
-                    <div className="system-container">
-                        <Outlet />
+            <div className="admin-dashboard">
+                <div className="admin-dashboard__menu">{isLoggedIn && <Header />}</div>
+                <div className="admin-dashboard__data">
+                    <div className="system-list">
+                        <div className="system-container">
+                            <Outlet />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -23,6 +26,7 @@ class System extends Component {
 const mapStateToProps = (state) => {
     return {
         systemMenuPath: state.app.systemMenuPath,
+        isLoggedIn: state.user.isLoggedIn,
     };
 };
 

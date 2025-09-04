@@ -117,7 +117,7 @@ class UserManage extends Component {
         let users = this.state.arrUsers;
 
         return (
-            <div className="users-container mx-4">
+            <div className="users-container pd-4">
                 <ModalUser
                     isOpen={this.state.isOpenModal}
                     toogleModalPrarent={this.toggleModal}

@@ -9,9 +9,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 import UserManage from '../System/UserManage';
 
+import { languages } from '../../utils/constant';
+
 class Header extends Component {
+    handleChangeLanguage = (language) => {
+        console.log('check language: ', this.props.language);
+        this.props.changeLanguageAppRedux(language);
+    };
     render() {
-        const { processLogout } = this.props;
+        const { processLogout, language } = this.props;
 
         return (
             <div className="header-container">
@@ -20,8 +26,25 @@ class Header extends Component {
                     <Navigator menus={adminMenu} />
                 </div>
                 {/* nút logout */}
-                <div className="btn btn-logout" onClick={processLogout}>
-                    <FontAwesomeIcon icon={faRightToBracket} />
+                <div>
+                    <div className="change-language">
+                        <span
+                            className={language === languages.VI ? 'language-vi active' : 'language-vi'}
+                            onClick={() => this.handleChangeLanguage(languages.VI)}
+                        >
+                            VI
+                        </span>
+                        <span
+                            className={language === languages.EN ? 'language-en active' : 'language-en'}
+                            onClick={() => this.handleChangeLanguage(languages.EN)}
+                        >
+                            EN
+                        </span>
+                    </div>
+                    <div className="btn btn-logout" onClick={processLogout} title="Logout">
+                        <FontAwesomeIcon icon={faRightToBracket} />
+                        <span> Đăng xuất </span>
+                    </div>
                 </div>
             </div>
         );
@@ -31,11 +54,13 @@ class Header extends Component {
 const mapStateToProps = (state) => {
     return {
         isLoggedIn: state.user.isLoggedIn,
+        language: state.app.language,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        changeLanguageAppRedux: (language) => dispatch(actions.changeLanguageApp(language)),
         processLogout: () => dispatch(actions.processLogout()),
     };
 };

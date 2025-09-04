@@ -1,4 +1,4 @@
-@import "../styles/common.scss";
+@import '../styles/common.scss';
 
 .navigator-menu {
     display: flex;
@@ -9,16 +9,18 @@
         list-style-type: none;
     }
     .menu-group {
+        width: 100%;
         &:hover {
             cursor: pointer;
             background-color: darken($colormain, 5);
         }
         .menu-group-name {
             line-height: 40px;
-            padding: 0 15px;
-            border-right: 1px solid $border;
+
+            text-align: center;
+            // border-right: 1px solid $border;
             &:first-child {
-                border-left: 1px solid $border;
+                // border-left: 1px solid $border;
             }
         }
         .menu-list {
@@ -29,6 +31,7 @@
             color: $text-in-light;
             position: absolute;
             padding: 0;
+
             .menu {
                 width: 205px;
                 padding: 0 15px;

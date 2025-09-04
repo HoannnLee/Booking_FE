@@ -14,7 +14,7 @@ class ModalUser extends Component {
             firstName: '',
             lastName: '',
             address: '',
-            phone: '',
+            phoneNumber: '',
         };
     }
 
@@ -41,7 +41,7 @@ class ModalUser extends Component {
 
     checkValidateInput = () => {
         let isValid = true;
-        const arrInput = ['email', 'password', 'firstName', 'lastName', 'address', 'phone'];
+        const arrInput = ['email', 'password', 'firstName', 'lastName', 'address', 'phoneNumber'];
         for (let i = 0; i < arrInput.length; i++) {
             if (!this.state[arrInput[i]]) {
                 isValid = false;
@@ -62,7 +62,7 @@ class ModalUser extends Component {
                 firstName: '',
                 lastName: '',
                 address: '',
-                phone: '',
+                phoneNumber: '',
             });
         }
     };
@@ -158,8 +158,8 @@ class ModalUser extends Component {
                                     <input
                                         type="text"
                                         className="input-modal"
-                                        onChange={(e) => this.handleOnchangeInput(e, 'phone')}
-                                        value={this.state.phone}
+                                        onChange={(e) => this.handleOnchangeInput(e, 'phoneNumber')}
+                                        value={this.state.phoneNumber}
                                     />
                                 </div>
                             </div>

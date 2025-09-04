@@ -16,7 +16,7 @@ class ModalEdit extends Component {
             firstName: '',
             lastName: '',
             address: '',
-            phone: '',
+            phoneNumber: '',
         };
     }
 
@@ -30,7 +30,7 @@ class ModalEdit extends Component {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 address: user.address,
-                phone: user.phoneNumber,
+                phoneNumber: user.phoneNumber,
             });
         }
     }
@@ -50,7 +50,7 @@ class ModalEdit extends Component {
 
     checkValidateInput = () => {
         let isValid = true;
-        const arrInput = ['email', 'password', 'firstName', 'lastName', 'address', 'phone'];
+        const arrInput = ['email', 'password', 'firstName', 'lastName', 'address', 'phoneNumber'];
         for (let i = 0; i < arrInput.length; i++) {
             if (!this.state[arrInput[i]]) {
                 isValid = false;
@@ -162,8 +162,8 @@ class ModalEdit extends Component {
                                     <input
                                         type="text"
                                         className="input-modal"
-                                        onChange={(e) => this.handleOnchangeInput(e, 'phone')}
-                                        value={this.state.phone}
+                                        onChange={(e) => this.handleOnchangeInput(e, 'phoneNumber')}
+                                        value={this.state.phoneNumber}
                                     />
                                 </div>
                             </div>
