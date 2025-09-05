@@ -16,7 +16,7 @@ import { CustomToastCloseButton } from '../components/CustomToast';
 import ConfirmModal from '../components/ConfirmModal';
 import PublicOnlyRoute from './Router/publicOnlyRoute';
 import PrivateRoute from './Router/privateRoute';
-import UserRedux from './System/UserRedux';
+import UserRedux from './System/Admin/UserRedux';
 import UserManage from './System/UserManage';
 import HomePage from './Home/HomePage';
 import CustomScrollbars from '../components/CustomScrollbars';

@@ -4,8 +4,8 @@ export const adminMenu = [
         //hệ thống
         name: 'menu.admin.user-manage',
         menus: [
-            { name: 'menu.admin.crud', link: '/system/crud' },
-            { name: 'menu.admin.crud-redux', link: '/system/crud-redux' },
+            { name: 'menu.admin.crud', link: '/system/user-manage' },
+            { name: 'menu.admin.crud-redux', link: '/system/user-redux' },
             {
                 name: 'menu.admin.doctor-manage', link:' /system/doctor-manage'
                 // subMenus: [

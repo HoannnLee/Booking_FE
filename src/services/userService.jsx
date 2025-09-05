@@ -52,4 +52,18 @@ const editUserService = async (dataInput) => {
         throw error.message;
     }
 };
-export { handleLoginApi, getAllUsers, createNewUserService, deleteUserService, editUserService };
+
+const getAllCodeService = async (inputType) => {
+    try {
+        const res = await httpRequest.get(`/api/allcode?type=${inputType}`);
+
+        return res.data;
+    } catch (error) {
+        throw error.message;
+    }
+}
+export {
+    handleLoginApi, getAllUsers,
+    createNewUserService, deleteUserService,
+    editUserService, getAllCodeService
+};

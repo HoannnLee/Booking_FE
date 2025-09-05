@@ -23,5 +23,18 @@
             "specialty-manage": "Specialty management",
             "handbook-manage": "Handbook management"
         }
+    },
+    "user-manage": {
+        "add": "Add",
+        "email": "Email",
+        "password": "Password",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "address": "Address",
+        "phoneNumber": "Phone",
+        "gender": "Gender",
+        "position": "Position",
+        "role": "Role",
+        "image": "Avatar"
     }
 }

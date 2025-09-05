@@ -23,5 +23,18 @@
             "specialty-manage": "Quản lý chuyên khoa",
             "handbook-manage": "Quản lý cẩm nang"
         }
+    },
+    "user-manage": {
+        "add": "Thêm",
+        "email": "Email",
+        "password": "Mật khẩu",
+        "firstName": "Họ",
+        "lastName": "Tên",
+        "address": "Địa chỉ",
+        "phoneNumber": "Số điện thoại",
+        "gender": "Giới tính",
+        "position": "Chức danh",
+        "role": "Vai trò",
+        "image": "Ảnh đại diện"
     }
 }
