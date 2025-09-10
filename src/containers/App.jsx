@@ -22,6 +22,8 @@ import HomePage from './Home/HomePage';
 import CustomScrollbars from '../components/CustomScrollbars';
 import './App.scss';
 
+
+
 class App extends Component {
     handlePersistorState = () => {
         const { persistor } = this.props;

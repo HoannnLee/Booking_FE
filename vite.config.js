@@ -9,4 +9,10 @@ export default defineConfig({
             usePolling: true,
         },
     },
+    define: {
+        global: {},
+    },
+    optimizeDeps: {
+        include: ["react-image-lightbox-2"]
+    }
 });

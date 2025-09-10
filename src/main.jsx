@@ -12,6 +12,9 @@ import { Provider } from 'react-redux';
 import reduxStore, { persistor } from './redux.js';
 import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 
+import Modal from 'react-modal';
+
+Modal.setAppElement("#root");
 // If you want your a
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);

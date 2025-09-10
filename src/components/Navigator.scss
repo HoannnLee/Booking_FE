@@ -12,6 +12,7 @@
     .menu-group {
         width: 100%;
         position: relative;
+        z-index: 999;
         &:hover {
             cursor: pointer;
             background-color: darken($colormain, 5);
