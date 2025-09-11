@@ -78,7 +78,7 @@ const adminReducer = (state = initialState, action) => {
             const copyStatePositionSuccess = {...state}
             copyStatePositionSuccess.isLoadingGender = false;
             copyStatePositionSuccess.position = action.data
-            console.log("check position: ", copyStatePositionSuccess)
+       
 
             return {
                 ...copyStatePositionSuccess,
