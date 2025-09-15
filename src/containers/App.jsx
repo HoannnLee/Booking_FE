@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Route, Routes, unstable_HistoryRouter as HistoryRouter, Navigate } from 'react-router-dom';
 // import { history } from '../redux';
-import { ToastContainer } from 'react-toastify';
+import { Bounce, ToastContainer } from 'react-toastify';
 
 import { path } from '../utils';
 
@@ -66,7 +66,7 @@ class App extends Component {
                         </CustomScrollbars>
                     </div>
 
-                    <ToastContainer
+                    {/* <ToastContainer
                         className="toast-container"
                         toastClassName="toast-item"
                         bodyClassName="toast-item-body"
@@ -77,6 +77,20 @@ class App extends Component {
                         closeOnClick={false}
                         draggable={false}
                         closeButton={<CustomToastCloseButton />}
+                    /> */}
+
+                    <ToastContainer
+                        position="top-right"
+                        autoClose={5000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick={false}
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                        theme="light"
+                        transition={Bounce}
                     />
                 </div>
             </Fragment>

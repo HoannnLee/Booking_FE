@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner, faUpload } from '@fortawesome/free-solid-svg-icons';
 import Lightbox from 'react-image-lightbox-2';
 import 'react-image-lightbox-2/style.css'; //
+import TableManageUser from './TableManageUser';
 import { add } from 'lodash';
 
 
@@ -76,6 +77,20 @@ class UserRedux extends Component {
                 position: arrPosition && arrPosition.length > 0 ? arrPosition[0].key : "",
             })
         }
+        else if (prevProps.listUser !== this.props.listUser) {
+            this.setState({
+                email: "",
+                password: "",
+                firstName: " ",
+                lastName: "",
+                address: "",
+                phoneNumber: "",
+                gender: " ",
+                position: "",
+                role: "",
+                avatar: ""
+            })
+        }
     }
 
     handleOnchangeImg = (e) => {
@@ -133,7 +148,7 @@ class UserRedux extends Component {
             positionId: this.state.position,
         })
 
-  
+
     }
 
     handleOnchangeInput = (event, id) => {
@@ -328,6 +343,7 @@ class UserRedux extends Component {
 
                     </div>
                 </div >
+                <TableManageUser />
                 {this.state.isOpen === true &&
                     <Lightbox
                         mainSrc={this.state.previewImg}
@@ -347,6 +363,7 @@ const mapStateToProps = (state) => {
         roleRedux: state.admin.role,
         positionRedux: state.admin.position,
         isLoadingGender: state.admin.isLoadingGender,
+        listUser: state.admin.users
     };
 };
 
