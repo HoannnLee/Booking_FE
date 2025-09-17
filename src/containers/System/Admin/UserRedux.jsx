@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { getAllCodeService } from '../../../services/userService';
-import { languages, CRUD_Actions } from "../../../utils"
+import { languages, CRUD_Actions, CommonUtils } from "../../../utils"
 import { createNewUser, editUserStart, fetchGenderStart, fetchPositionStart, fetchRoleStart } from '../../../store/actions';
 import "./UserRedux.scss"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,7 +10,7 @@ import { faSpinner, faUpload } from '@fortawesome/free-solid-svg-icons';
 import Lightbox from 'react-image-lightbox-2';
 import 'react-image-lightbox-2/style.css'; //
 import TableManageUser from './TableManageUser';
-import { add } from 'lodash';
+import { Buffer } from 'buffer';
 
 
 class UserRedux extends Component {
@@ -95,25 +95,24 @@ class UserRedux extends Component {
                 position: arrPosition && arrPosition.length > 0 ? arrPosition[0].key : "",
                 role: arrRole && arrRole.length > 0 ? arrRole[0].key : "",
                 avatar: "",
-                action: CRUD_Actions.CREATE
+                action: CRUD_Actions.CREATE,
+                previewImg: ""
             })
         }
     };
 
-    handleOnchangeImg = (e) => {
+    handleOnchangeImg = async (e) => {
         const data = e.target.files;
         const file = data[0]
-        console.log("check image:", file)
+        let base64 = await CommonUtils.getBase64(file)
+        console.log("check image:", base64)
         if (file) {
             const objectURL = URL.createObjectURL(file);
             this.setState({
                 previewImg: objectURL,
-                avatar: file
+                avatar: base64
             })
-
-
         }
-
     };
 
     openPreviewImg = () => {
@@ -138,24 +137,6 @@ class UserRedux extends Component {
         return isValidate;
     };
 
-    handleDatafromParent = (user) => {
-        console.log("check data from parent", user)
-        this.setState({
-            email: user.email,
-            password: "fillllllllllll",
-            firstName: user.firstName,
-            lastName: user.lastName,
-            address: user.address,
-            phoneNumber: user.phoneNumber,
-            gender: user.gender,
-            position: user.positionId,
-            role: user.roleId,
-            avatar: "",
-            action: CRUD_Actions.EDIT,
-            editUserId: user.id
-        })
-    };
-
     handleCreateUser = () => {
         const isValidate = this.checkValidate()
         let { action } = this.state;
@@ -173,6 +154,8 @@ class UserRedux extends Component {
                 gender: this.state.gender,
                 roleId: this.state.role,
                 positionId: this.state.position,
+                avatar: this.state.avatar,
+                previewImg: ""
             })
         } else if (action === CRUD_Actions.EDIT) {
             this.props.updateUserRedux({
@@ -186,7 +169,7 @@ class UserRedux extends Component {
                 gender: this.state.gender,
                 roleId: this.state.role,
                 positionId: this.state.position,
-                // avatar here
+                avatar: this.state.avatar
             })
         }
 
@@ -205,6 +188,27 @@ class UserRedux extends Component {
 
     };
 
+    handleDatafromParent = (user) => {
+        let imageBase64 = " ";
+        if (user.image) {
+            imageBase64 = new Buffer(user.image, "base64").toString("binary");
+        }
+        this.setState({
+            email: user.email,
+            password: "fillllllllllll",
+            firstName: user.firstName,
+            lastName: user.lastName,
+            address: user.address,
+            phoneNumber: user.phoneNumber,
+            gender: user.gender,
+            position: user.positionId,
+            role: user.roleId,
+            avatar: imageBase64,
+            previewImg: imageBase64,
+            action: CRUD_Actions.EDIT,
+            editUserId: user.id
+        })
+    };
 
     render() {
         const genders = this.state.genderArr;
@@ -217,7 +221,7 @@ class UserRedux extends Component {
             address, phoneNumber, gender, position, role, avatar
         } = this.state;
 
-
+       
         return (
             <div className='user-reduxPage'>
                 <div className="text-center title">Manage Users  with redux</div>
