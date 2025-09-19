@@ -42,6 +42,9 @@
     z-index: 999;
 }
 
+.slick-disabled {
+    display: none !important;
+}
 
 .section{
     height: 410px;
@@ -177,7 +180,7 @@
                 }
                 &.section-img---oustadingDoctor{
                     // background: url(../../assets/OutStandingDoctor/avatar-doctor.jpg)  center top no-repeat;
-                    background-position: top ;
+                    background-position: center center ;
                     background-repeat: no-repeat;
                     width: 200px;
                     height: 200px;
