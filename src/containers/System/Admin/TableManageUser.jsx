@@ -69,7 +69,7 @@ class TableManageUser extends Component {
 
                                 users.map((item, index) => {
                                     return (
-                                        <tr>
+                                        <tr key={index}>
                                             <td scope="row" className="text-center">
                                                 {item.id}
                                             </td>

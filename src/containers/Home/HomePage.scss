@@ -176,7 +176,9 @@
                     background: url(../../assets/medical-facility/benh-vien-viet-duc.jpg)  center top no-repeat;
                 }
                 &.section-img---oustadingDoctor{
-                    background: url(../../assets/OutStandingDoctor/avatar-doctor.jpg)  center top no-repeat;
+                    // background: url(../../assets/OutStandingDoctor/avatar-doctor.jpg)  center top no-repeat;
+                    background-position: top ;
+                    background-repeat: no-repeat;
                     width: 200px;
                     height: 200px;
                     padding: 0;

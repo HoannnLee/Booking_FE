@@ -62,8 +62,20 @@ const getAllCodeService = async (inputType) => {
         throw error.message;
     }
 }
+
+
+const getTopDoctor = async (limit) => {
+    try {
+        const res = await httpRequest.get(`/api/get-top-doctor?limit=${limit}`);
+
+        return res.data;
+    } catch (error) {
+        throw error.message;
+    }
+}
 export {
     handleLoginApi, getAllUsers,
     createNewUserService, deleteUserService,
-    editUserService, getAllCodeService
+    editUserService, getAllCodeService,
+    getTopDoctor
 };
