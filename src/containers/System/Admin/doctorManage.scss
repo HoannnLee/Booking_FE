@@ -1,0 +1,68 @@
+.manageDoctor-container{
+    .manageDoctor-container__title{
+        text-align: center;
+        text-transform: capitalize;
+        font-weight: 600;
+        font-size: 18px;
+        padding: 16px 0;
+        margin-bottom: 12px
+    }
+    .manageDoctor-container__moreInfo{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        .moreInfo-select{
+            width: 100%;
+            flex: 0 0 50%;
+            margin-right: 12px;
+            .moreInfo-select__input{
+                width: 100%;
+            }
+        }
+        .moreInfo-textArea{
+            width: 100%;
+            flex: 0 0 50%;
+
+            .moreInfo-textArea__input{
+                width: 100%;
+                border: 1px solid #CCCCCC;
+                border-radius: 5px;
+                padding: 6px
+            }
+        }
+    }
+    .manageDoctor-container__editor{
+        margin-top: 12px;
+    }
+    .manageDoctor-container__btn{
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
+        .manageDoctor-container__btnSave{
+            outline: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            border: none;
+            background-color: #92D7EE;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+            &:hover{
+                opacity: 0.9;
+            }
+        }
+    }
+}
+    
+    
+
+
+.rc-md-editor .editor-container .sec-md .input{
+    height: 93%;
+}
+
+.rc-md-editor .rc-md-navigation{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+

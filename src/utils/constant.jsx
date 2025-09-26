@@ -5,8 +5,6 @@ export const path = {
     LOG_OUT: '/logout',
     SYSTEM: '/system',
     user_manage: '/system/user-manage',
-    product_manage: '/system/product-manage',
-    register_package_group_or_account: '/system/register-package-group-or-account',
 };
 
 export const languages = {

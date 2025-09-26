@@ -21,6 +21,7 @@ import UserManage from './System/UserManage';
 import HomePage from './Home/HomePage';
 import CustomScrollbars from '../components/CustomScrollbars';
 import './App.scss';
+import DoctorManage from './System/Admin/doctorManage';
 
 
 
@@ -61,6 +62,7 @@ class App extends Component {
                                     {/* Các đường dẫn con */}
                                     <Route path="user-manage" element={<UserManage />} />
                                     <Route path="user-redux" element={<UserRedux />} />
+                                    <Route path="doctor-manage" element={<DoctorManage />} />
                                 </Route>
                             </Routes>
                         </CustomScrollbars>

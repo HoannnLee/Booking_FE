@@ -124,7 +124,7 @@ class TableManageUser extends Component {
                 </div>
 
                 <MdEditor
-                    style={{ height: 500 }}
+                    style={{ height: 450, borderRadius: 10 }}
 
                     renderHTML={(text) => mdParser.render(text)}
                     onChange={handleEditorChange}

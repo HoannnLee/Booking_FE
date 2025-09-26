@@ -8,5 +8,8 @@
     .admin-dashboard__data {
         flex: 0 0 88%;
         position: relative;
+        overflow-y: scroll;
+        height: 100vh;
+        padding: 12px 18px;
     }
 }
