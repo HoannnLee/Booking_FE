@@ -73,9 +73,31 @@ const getTopDoctor = async (limit) => {
         throw error.message;
     }
 }
+
+
+const getAllDoctor = async () => {
+    try {
+        const res = await httpRequest.get("/api/get-all-doctor");
+
+        return res.data;
+    } catch (error) {
+        throw error.message;
+    }
+}
+
+
+const saveDetailInfoDoctor = async (dataInput) => {
+    try {
+        const res = await httpRequest.post("/api/save-info-doctor", dataInput);
+
+        return res.data;
+    } catch (error) {
+        throw error.message;
+    }
+}
 export {
     handleLoginApi, getAllUsers,
     createNewUserService, deleteUserService,
     editUserService, getAllCodeService,
-    getTopDoctor
+    getTopDoctor,getAllDoctor,saveDetailInfoDoctor
 };

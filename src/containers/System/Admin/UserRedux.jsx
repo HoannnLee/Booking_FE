@@ -221,7 +221,7 @@ class UserRedux extends Component {
             address, phoneNumber, gender, position, role, avatar
         } = this.state;
 
-        console.log("check gender: ", this.props.genderRedux)
+      
         return (
 
 

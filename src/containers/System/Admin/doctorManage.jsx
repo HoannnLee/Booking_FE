@@ -6,7 +6,7 @@ import '../UserManage.scss';
 import "./TableManageUser.scss"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faUserPen } from '@fortawesome/free-solid-svg-icons';
-import { deleteUserStart, fetchAllUserStart } from '../../../store/actions';
+import { deleteUserStart, fetchAllDoctorStart, fetchAllUserStart, saveDetailInfoDoctorStart } from '../../../store/actions';
 import * as ReactDOM from 'react-dom'
 import MarkdownIt from 'markdown-it'
 import MdEditor from 'react-markdown-editor-lite'
@@ -14,14 +14,9 @@ import MdEditor from 'react-markdown-editor-lite'
 import 'react-markdown-editor-lite/lib/index.css'
 import "./doctorManage.scss"
 import Select from 'react-select';
+import { languages } from '../../../utils';
 
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
-];
 const mdParser = new MarkdownIt(/* Markdown-it options */);
-
 
 
 class DoctorManage extends Component {
@@ -31,9 +26,50 @@ class DoctorManage extends Component {
             contentHTML : "",
             contentMarkdown: "",
             selectedOption: "",
-            description: ""
+            description: "",
+            listDoctors: []
         }
 
+    }
+
+  
+    async componentDidMount() {
+        this.props.getAllDoctor();
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevProps.listDoctorsRedux !== this.props.listDoctorsRedux){
+            const dataSelect =  this.buildInputData(this.props.listDoctorsRedux)
+            this.setState({
+                listDoctors :  dataSelect
+            })
+        }
+        if(prevProps.language !== this.props.language){
+            const dataSelect =  this.buildInputData(this.props.listDoctorsRedux)
+            this.setState({
+                listDoctors :  dataSelect
+            })
+        }
+    }
+
+      buildInputData = (inputData) => {
+        let result = [];
+        let { language } = this.props;
+     
+        if(inputData && inputData.length > 0 ){
+            inputData.map((item, index) => {
+                let object = {};
+                const valueVi = `${item.firstName} ${item.lastName}`;
+                const valueEn = `${item.lastName} ${item.firstName}`;
+            
+                object.label = language === languages.VI ? valueVi : valueEn;
+                object.value = item.id;
+
+                result.push(object)
+            })
+        }
+
+        return result;
     }
      handleChange = (selectedOption) => {
         this.setState({ selectedOption });
@@ -46,7 +82,12 @@ class DoctorManage extends Component {
     }
 
     handSaveMarkdown = () => {
-        console.log("check markdown: ", this.state)
+       this.props.saveInfoDoctor({
+            contentHTML: this.state.contentHTML,
+            contentMarkdown: this.state.contentMarkdown,
+            description: this.state.description,
+            doctorId: this.state.selectedOption.value,
+       })
     }
 
     handleOnchangeTextArea = (e) => {
@@ -56,7 +97,7 @@ class DoctorManage extends Component {
         })
     }
     render() {
-
+       
         return (
             <div className='manageDoctor-container'>
                 <div className='manageDoctor-container__title'>Create Infomation Doctors</div>
@@ -67,7 +108,7 @@ class DoctorManage extends Component {
                         <Select
                             value={this.state.selectedOption}
                             onChange={this.handleChange}
-                            options={options}
+                            options={this.state.listDoctors}
                             className="moreInfo-select__input"
                         />
                     </div>
@@ -79,7 +120,7 @@ class DoctorManage extends Component {
                             onChange={(e) => this.handleOnchangeTextArea(e)}
                             value={this.state.description}
                         >
-                            hello
+                   
                         </textarea>
                     </div>
                 </div>
@@ -107,13 +148,14 @@ const mapStateToProps = (state) => {
     return {
         language: state.app.language,
         isLoadingGender: state.admin.isLoadingGender,
-
+        listDoctorsRedux: state.admin.allDoctor,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-
+        getAllDoctor : () => dispatch(fetchAllDoctorStart()),
+        saveInfoDoctor: (data) => dispatch(saveDetailInfoDoctorStart(data))
     };
 };
 
